@@ -13,12 +13,6 @@ const LandingPage = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>
-                Already has an account? 
-            </Text>
-            
-
-
             {hasAccount ? 
             <ConnectAccount />
             :
