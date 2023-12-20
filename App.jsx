@@ -13,10 +13,14 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LandingPage from './src/Screens/Landing';
 
 const App = () => {
   
+  const Stack = createNativeStackNavigator();
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -25,7 +29,11 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <Text>TEST</Text>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Landing">
+            <Stack.Screen name="Landing" component={LandingPage}/>
+          </Stack.Navigator>
+        </NavigationContainer>
     </SafeAreaView>
   );
 }
