@@ -30,7 +30,11 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Landing">
+          <Stack.Navigator 
+          initialRouteName="Landing" 
+          screenOptions={{
+            headerShown: false
+    }}>
             <Stack.Screen name="Landing" component={LandingPage}/>
           </Stack.Navigator>
         </NavigationContainer>
