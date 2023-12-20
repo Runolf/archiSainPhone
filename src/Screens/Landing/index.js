@@ -1,12 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 const LandingPage = () => {
-    return <View>
-        <Text>
-            Landing page
-        </Text>
-    </View>
+    return (
+        <View>
+            <Text  style={styles.container}>
+                Landing page
+            </Text>
+        </View>
+    ) 
 }
- 
+
+const styles = StyleSheet.create({
+    container: {
+        color: "white",
+    }
+});
+
 export default LandingPage;

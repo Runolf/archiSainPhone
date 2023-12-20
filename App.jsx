@@ -13,7 +13,7 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingPage from './src/Screens/Landing';
 
@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <NavigationContainer>
+        <NavigationContainer theme={Theme}>
           <Stack.Navigator 
           initialRouteName="Landing" 
           screenOptions={{
@@ -45,8 +45,20 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor: AppCss.under_the_sea_deep.toString(),
   },
 });
+
+const Theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'red',
+    background: 'teal',    
+    card: 'rgb(255, 255, 255)',
+    text: 'white',
+    border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
+  },
+};
 
 export default App;
