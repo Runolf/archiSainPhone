@@ -7,12 +7,12 @@ const ConnectAccount = () => {
 
     const [password, setPassword] = useState();
 
-    const onChangeMail = () => {
-
+    const onChangeMail = (val) => {
+        setMail(val);
     }
 
-    const onChangePassword = () => {
-
+    const onChangePassword = (val) => {
+        setPassword(val);
     }
 
     return (
@@ -30,8 +30,11 @@ const ConnectAccount = () => {
                 onChangeText={onChangePassword}
                 value={password}
                 placeholder="password"
+                secureTextEntry={true}
             />
-            
+
+            <Text>your mail is {mail}</Text>
+            <Text> your password is {password}</Text>
         </View>
     );
 }
