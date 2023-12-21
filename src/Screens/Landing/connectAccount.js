@@ -5,13 +5,18 @@ const ConnectAccount = () => {
 
     const [mail, setMail] = useState();
 
+    const [password, setPassword] = useState();
+
     const onChangeMail = () => {
+
+    }
+
+    const onChangePassword = () => {
 
     }
 
     return (
         <View>
-            <Text>connect account</Text>
 
             <TextInput 
                 style={styles.input}
@@ -19,6 +24,14 @@ const ConnectAccount = () => {
                 value={mail}
                 placeholder="email"
             />
+
+            <TextInput 
+                style={styles.input}
+                onChangeText={onChangePassword}
+                value={password}
+                placeholder="password"
+            />
+            
         </View>
     );
 }

@@ -14,15 +14,22 @@ const LandingPage = () => {
     return (
         <View style={styles.container}>
             {hasAccount ? 
-            <ConnectAccount />
+            <>
+                <Text>connect account</Text>
+                <ConnectAccount />  
+            </>
             :
-            <CreateAccount />}
+            <>
+                <Text>Create account</Text>
+                <CreateAccount />
+            </>
+            }
 
             <Pressable 
                 onPress={onPressButton}
                 style={styles.button}
             > 
-                <Text style={styles.text}>Already has an account ?</Text>
+                {hasAccount? <Text style={styles.text}>Doesn't have an account ?</Text> : <Text style={styles.text}>Already has an account ?</Text> }
             </Pressable>
         </View>
     ) 

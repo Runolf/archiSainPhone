@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 const CreateAccount = () => {
     return (
         <View>
-            <Text>Create account</Text>
+            
         </View>
     );
 }
