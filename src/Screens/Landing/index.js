@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import CreateAccount from './createAccount';
 import ConnectAccount from './connectAccount';
+import ReduxTest from '../TryComponent/reduxTest';
 
-const LandingPage = () => {
+const LandingPage = ({navigation}) => {
 
     const [hasAccount, setHasAccount] = useState(false);
 
@@ -13,6 +14,9 @@ const LandingPage = () => {
 
     return (
         <View style={styles.container}>
+
+            <ReduxTest />
+
             {hasAccount ? 
             <>
                 <Text>connect account</Text>
