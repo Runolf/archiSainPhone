@@ -1,0 +1,1 @@
+export const getAllUsersSelector = (store) => store.users.listUsers

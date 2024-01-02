@@ -1,4 +1,4 @@
-import {ROLE_LIST} from "../actions/actionTypes";
+import {ROLE_LIST, LIST_USER} from "../actions/actionTypes";
 
 const initialState = {
     roles: [],
@@ -14,7 +14,15 @@ const users = (state = initialState, action) => {
                 listUsers: state.listUsers,
                 user: state.user
             }
+        case LIST_USER:
+            return {
+                roles: state.roles,
+                listUsers: action.payload.data,
+                user: state.user
+            }
         default:
             return state;
     }
 }
+
+export default users;
