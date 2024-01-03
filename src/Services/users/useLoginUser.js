@@ -9,28 +9,24 @@ const useLoginUser = () => {
     const URL = "http://10.0.2.2:8080/authenticate";
 
     const authenticate = (email, pwd) => {
-        try {
-            const body = {
-                email: email,
-                pwd: pwd
-            }
-            
-            const response = axios.post(`${URL}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                },
-                body: JSON.stringify(body)
-            })
+        let headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Access-Control-Allow-Origin": "*",
+        };
 
-            console.log("res auth: ", response);
-
-            dispatch(authenticationAction(response.data));
-
-        } catch (error) {
-            console.log("auth error: " , error)
+        let body = {
+            email: email,
+            pwd: pwd
         }
+        
+        axios.post(URL, body, { headers })
+        .then(res => {
+            console.log(res.data)
+        })
+        .catch(error => {
+            console.log("error in post: ", error)
+        })
     }
 
     return {
