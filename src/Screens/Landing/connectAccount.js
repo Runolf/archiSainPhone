@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import useLoginUser from '../../Services/users/useLoginUser';
 
 const ConnectAccount = () => {
+
+    const {authenticate} = useLoginUser();
+
+    const connectUser = (email, pwd) => {
+        authenticate(email, pwd)
+    }
 
     const [mail, setMail] = useState();
 
@@ -13,6 +20,12 @@ const ConnectAccount = () => {
 
     const onChangePassword = (val) => {
         setPassword(val);
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        connectUser(mail, password);
     }
 
     return (
@@ -35,6 +48,8 @@ const ConnectAccount = () => {
 
             <Text>your mail is {mail}</Text>
             <Text> your password is {password}</Text>
+
+            <Button title='onSubmit' onPress={submitHandler}/>
         </View>
     );
 }
