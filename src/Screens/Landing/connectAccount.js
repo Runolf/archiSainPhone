@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Pressable,  } from 'react-native';
 import useLoginUser from '../../Services/users/useLoginUser';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ConnectAccount = () => {
-
+const ConnectAccount = ({navigation}) => {
+    let bear = AsyncStorage.getItem("token");
     const {authenticate} = useLoginUser();
 
     const connectUser = (email, pwd) => {
-        authenticate(email, pwd)
+        authenticate(email, pwd);
+        navigation.navigate("Homescreen");
     }
+
+    useEffect(() => {
+        
+        console.log("bear : ", bear);
+    }, [bear])
 
     const [mail, setMail] = useState();
 
@@ -46,10 +53,9 @@ const ConnectAccount = () => {
                 secureTextEntry={true}
             />
 
-            <Text>your mail is {mail}</Text>
-            <Text> your password is {password}</Text>
-
-            <Button title='onSubmit' onPress={submitHandler}/>
+            <Pressable style={styles.button} title='onSubmit' onPress={submitHandler}>
+                <Text>Submit</Text>
+            </Pressable>
         </View>
     );
 }
@@ -58,6 +64,14 @@ const styles = StyleSheet.create({
     input: {
         height: 40,
         width: 200,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+    button: {
+        width: "auto",
+        backgroundColor:"#841584",
+        borderRadius: 8,
         margin: 12,
         borderWidth: 1,
         padding: 10,

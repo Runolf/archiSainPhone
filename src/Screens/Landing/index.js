@@ -16,12 +16,12 @@ const LandingPage = ({navigation}) => {
             {hasAccount ? 
             <>
                 <Text>connect account</Text>
-                <ConnectAccount />  
+                <ConnectAccount navigation={navigation} />  
             </>
             :
             <>
                 <Text>Create account</Text>
-                <CreateAccount />
+                <CreateAccount navigation={navigation}/>
             </>
             }
 
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         color: "white",
     },
     button: {
-        width: "50%",
+        width: "auto",
         backgroundColor:"#841584",
         borderRadius: 8,
         margin: 12,

@@ -4,7 +4,7 @@ const initialState = {
     roles: [],
     listUsers: [],
     user: {},
-    auth: {}
+    bearer: {}
 }
 
 const users = (state = initialState, action) => {
@@ -14,21 +14,21 @@ const users = (state = initialState, action) => {
                 roles: action.payload.data,
                 listUsers: state.listUsers,
                 user: state.user,
-                auth: state.auth
+                bearer: state.bearer
             }
         case LIST_USER:
             return {
                 roles: state.roles,
                 listUsers: action.payload.data,
                 user: state.user,
-                auth: state.auth
+                bearer: state.bearer
             }
         case AUTHENTICATION:
             return {
                 roles: state.roles,
                 listUsers: state.listUsers,
                 user: state.user,
-                auth: action.payload.data
+                bearer: action.payload.data
             }
         default:
             return state;

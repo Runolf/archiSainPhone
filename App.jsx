@@ -16,9 +16,10 @@ import {
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingPage from './src/Screens/Landing';
-import ReduxTest from './src/Screens/TryComponent/reduxTest';
+import HomeScreen from './src/Screens/Landing/homeScreen';
 import {store} from './src/redux/store';
 import { Provider } from 'react-redux';
+
 
 const App = () => {
   
@@ -40,7 +41,8 @@ const App = () => {
             headerShown: false
     }}>
             <Stack.Screen name="Landing" component={LandingPage}/>
-            <Stack.Screen name="ReduxTest" component={ReduxTest}/>
+            <Stack.Screen name="Homescreen" component={HomeScreen}/>
+          
           </Stack.Navigator>
         </NavigationContainer>
     </SafeAreaView>
