@@ -22,10 +22,11 @@ const useLoginUser = () => {
         
         axios.post(URL, body, { headers })
         .then(res => {
-            console.log(res.data)
+            console.log(res.data);
+            dispatch(authenticationAction(res.data));
         })
         .catch(error => {
-            console.log("error in post: ", error)
+            console.log("auth error: ", error);
         })
     }
 
