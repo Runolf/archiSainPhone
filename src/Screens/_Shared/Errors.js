@@ -10,6 +10,7 @@ const Errors = (errorList) => {
                 <FlatList 
                     data={errorList}
                     renderItem={renderitem}
+                    keyExtractor={(item, index) => index.toString()}
                 />
             </View>
     )
