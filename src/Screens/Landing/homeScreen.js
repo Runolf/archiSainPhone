@@ -6,6 +6,8 @@ const HomeScreen = ({navigation}) => {
 
     const deconnect = () => {
         AsyncStorage.removeItem("token");
+
+        console.log("remove token ",AsyncStorage.getItem("token"));
         navigation.navigate("Landing");
     }
     return (

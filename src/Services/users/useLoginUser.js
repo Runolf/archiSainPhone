@@ -23,8 +23,9 @@ const useLoginUser = () => {
         
        await axios.post(URL, body, { headers })
         .then(res => {
-            console.log("axios bear: ", res.data);
-            AsyncStorage.setItem("token", res.data["token"]);
+            // console.log("axios post")
+            storeData("token", res.data["token"])
+            //AsyncStorage.setItem("token", res.data["token"]);
             dispatch(authenticationAction(res.data));
         })
         .catch(error => {
@@ -32,8 +33,32 @@ const useLoginUser = () => {
         })
     }
 
+    const storeData = async (key, value) => {
+        try {
+            await AsyncStorage.setItem(key, value)
+        } catch (error) {
+            console.log("error storeData: ", error);
+        }
+    }
+
+    const getStoredData = async (key) => {
+        try {
+            const value = await AsyncStorage.getItem(key);
+            return value;
+        } catch (error) {
+            console.log("error getStoredData: ", error);
+        }
+    }
+
+    const removeItemStore = async (key) => {
+        AsyncStorage.removeItem(key)
+    }
+
     return {
-        authenticate
+        authenticate,
+        storeData,
+        getStoredData,
+        removeItemStore
     };
 }
  

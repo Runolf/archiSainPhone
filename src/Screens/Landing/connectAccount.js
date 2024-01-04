@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable,  } from 'react-native';
 import useLoginUser from '../../Services/users/useLoginUser';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ConnectAccount = ({navigation}) => {
-    let bear = AsyncStorage.getItem("token");
-    const {authenticate} = useLoginUser();
+    const {authenticate, getStoredData} = useLoginUser();
 
-    const connectUser = (email, pwd) => {
-        authenticate(email, pwd);
-        navigation.navigate("Homescreen");
-    }
-
-    useEffect(() => {
+    const connectUser = async (email, pwd) => {
+        await authenticate(email, pwd);
+        let bearer = await getStoredData('token');
         
-        console.log("bear : ", bear);
-    }, [bear])
+        // console.log("Bearer from connect user: ", bearer);
+        
+        if(typeof bearer == "string") {
+            navigation.navigate("Homescreen");
+        } else {
+            // here need to be implemented the errors that must be displayed
+            return
+        }
+        
+    }
 
     const [mail, setMail] = useState();
 
