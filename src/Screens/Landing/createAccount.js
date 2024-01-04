@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Pressable, TextInput, StyleSheet, ScrollView, FlatList } from 'react-native';
+import {isAnEmail, isNumbers, doesNotCountainsNumbers} from '../../Components/hooks/validators';
+import useValidation from '../../Components/hooks/useValidation';
 
 const CreateAccount = () => {
+    const [errors, setErrors] = useState([]);
 
     const [mail, setMail] = useState();
 
@@ -53,79 +56,123 @@ const CreateAccount = () => {
         setTall(val);
     }
 
+    const calculateIMC = (tall, weight) => {
+        let tallMetter = tall / 100;
+        let imc = weight / (tallMetter * tallMetter);
+        console.log("IMC: " + imc);
+    }
     /*
     const onChangePicture  = (val) => {
         setPicture(val);
     }
     */
+    const validateForm = () => {
+        if(password === checkPassword){
+            const validate_email = useValidation(mail, isAnEmail, "email is invalid");
+            console.log(validate_email.isValid);
+            if(!validate_email.isValid) errors.push(validate_email.errorMessage);
+
+            const validate_firstname = useValidation(firstname, doesNotCountainsNumbers, "firstname contain numbers");
+            console.log(validate_firstname.isValid);
+            if(!validate_firstname.isValid) errors.push(validate_firstname.errorMessage);
+
+            const validate_lastname = useValidation(lastName, doesNotCountainsNumbers, "lastname contain numbers");
+            console.log(validate_lastname.isValid);
+            if(!validate_lastname.isValid) errors.push(validate_lastname.errorMessage);
+            
+            console.log(errors);
+
+            const validate_tall = useValidation(tall, isNumbers, "is not a number");
+            const validate_weight = useValidation(weight, isNumbers, "is not a number");
+            if(validate_tall.isValid && validate_weight.isValid) calculateIMC(tall, weight);
+
+            return true;
+        }
+    }
+    const renderErrors = ({item}) => {
+        return <Text>{item}</Text>
+    }
     const submitHandler = (event) => {
         event.preventDefault();
 
+        validateForm();
+        
     }
+/*
+            <FlatList 
+                data={errors}
+                renderItem={renderErrors}
+                key={errors.keys}
+            />
+
+*/
 
     return (
         <View>
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeMail}
-                value={mail}
-                placeholder="email"
-            />
-            
-            <TextInput 
-                style={styles.input}
-                onChangeText={onChangePassword}
-                value={password}
-                placeholder="password"
-                secureTextEntry={true}
-            />
-            
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeCheckPassword}
-                value={checkPassword}
-                placeholder="check password"
-                secureTextEntry={true}
-            />
+            <ScrollView>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeMail}
+                    value={mail}
+                    placeholder="email"
+                />
+                
+                <TextInput 
+                    style={styles.input}
+                    onChangeText={onChangePassword}
+                    value={password}
+                    placeholder="password"
+                    secureTextEntry={true}
+                />
+                
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeCheckPassword}
+                    value={checkPassword}
+                    placeholder="check password"
+                    secureTextEntry={true}
+                />
 
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeFirstname}
-                value={firstname}
-                placeholder="firstname"
-            />
-            
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeLastname}
-                value={lastName}
-                placeholder="lastname"
-            />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeFirstname}
+                    value={firstname}
+                    placeholder="firstname"
+                />
+                
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeLastname}
+                    value={lastName}
+                    placeholder="lastname"
+                />
 
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeWeight}
-                value={weight}
-                placeholder="weight"
-            />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeWeight}
+                    value={weight}
+                    placeholder="weight"
+                />
 
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangeTall}
-                value={tall}
-                placeholder="tall"
-            />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeTall}
+                    value={tall}
+                    placeholder="tall"
+                />
 
-            <TextInput
-                style={styles.input}
-                onChangeText={onChangePhone}
-                value={phone}
-                placeholder="phone"
-            />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangePhone}
+                    value={phone}
+                    placeholder="phone"
+                />
+                
+                <Pressable style={styles.button} title='onSubmit' onPress={submitHandler}>
+                    <Text>Submit</Text>
+                </Pressable>
+            </ScrollView>
 
-            <Pressable style={styles.button} title='onSubmit' onPress={submitHandler}>
-                <Text>Submit</Text>
-            </Pressable>
         </View>
     );
 }
