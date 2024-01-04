@@ -26,6 +26,8 @@ const CreateAccount = ({navigation}) => {
 
     const [tall, setTall] = useState();
 
+    const [inami, setInami] = useState();
+
    // const [picture, setPicture] = useState();
     
     const onChangeMail = (val) => {
@@ -64,6 +66,10 @@ const CreateAccount = ({navigation}) => {
         let tallMetter = tall / 100;
         let imc = weight / (tallMetter * tallMetter);
         console.log("IMC: " + imc);
+    }
+
+    const onChangeInami = (val) => {
+
     }
     /*
     const onChangePicture  = (val) => {
