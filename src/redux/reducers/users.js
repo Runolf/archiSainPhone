@@ -1,4 +1,5 @@
 import {ROLE_LIST, LIST_USER, AUTHENTICATION} from "../actions/actionTypes";
+import { USER_CREATE } from "../actions/actionTypes";
 
 const initialState = {
     roles: [],
@@ -29,6 +30,13 @@ const users = (state = initialState, action) => {
                 listUsers: state.listUsers,
                 user: state.user,
                 bearer: action.payload.data
+            }
+        case USER_CREATE:
+            return {
+                roles: state.roles,
+                listUsers: state.listUsers,
+                user: action.payload.data,
+                bearer: state.bearer
             }
         default:
             return state;
