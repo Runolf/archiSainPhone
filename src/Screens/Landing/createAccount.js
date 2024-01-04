@@ -118,7 +118,7 @@ const CreateAccount = ({navigation}) => {
                 weight,
                 tall
             }
-            //createUser(body);
+            createUser(body);
             errors = [];
             // redirection vers connexion
             navigation.navigate("Landing");

@@ -17,7 +17,7 @@ const useDataUser = () => {
 
 
     const postUser = async (newUser) => {
-        let body = newUser;
+        let body = JSON.stringify(newUser);
         
         await axios.post(`${URL}/user`, body, {headers})
         .then(res => {
