@@ -18,7 +18,7 @@ const CreateAccount = ({navigation}) => {
 
     const [firstname, setFirsname] = useState();
 
-    const [lastName, setLastname] = useState();
+    const [lastname, setLastname] = useState();
     
     const [phone, setPhone] = useState();
 
@@ -91,7 +91,7 @@ const CreateAccount = ({navigation}) => {
             //console.log(validate_firstname.isValid);
             if(!validate_firstname.isValid) errors.push(validate_firstname.errorMessage);
 
-            const validate_lastname = useValidation(lastName, doesNotCountainsNumbers, "lastname contain numbers");
+            const validate_lastname = useValidation(lastname, doesNotCountainsNumbers, "lastname contain numbers");
             //console.log(validate_lastname.isValid);
             if(!validate_lastname.isValid) errors.push(validate_lastname.errorMessage);
             
@@ -110,10 +110,10 @@ const CreateAccount = ({navigation}) => {
 
         if(validateForm()){
             let body = {
-                mail,
+                email: mail,
                 firstname,
-                lastName,
-                password,
+                lastname,
+                pwd: password,
                 phone,
                 weight,
                 tall
@@ -170,7 +170,7 @@ const CreateAccount = ({navigation}) => {
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeLastname}
-                    value={lastName}
+                    value={lastname}
                     placeholder="lastname"
                 />
 
