@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, ScrollView, FlatList } from 'react-native';
+import useDataUser from '../../Services/users/useDataUsers';
 import {isAnEmail, isNumbers, doesNotCountainsNumbers} from '../../Components/hooks/validators';
 import useValidation from '../../Components/hooks/useValidation';
+import Errors from '../_Shared/Errors';
 
-const CreateAccount = () => {
-    const [errors, setErrors] = useState([]);
+const CreateAccount = ({navigation}) => {
+    const {postUser} = useDataUser();
+
+    let errors = [];
 
     const [mail, setMail] = useState();
 
@@ -66,55 +70,77 @@ const CreateAccount = () => {
         setPicture(val);
     }
     */
+
+    const createUser = (newUser) => {
+        postUser(newUser);
+    }
     const validateForm = () => {
+        let isFormValid = false;
+
         if(password === checkPassword){
             const validate_email = useValidation(mail, isAnEmail, "email is invalid");
-            console.log(validate_email.isValid);
+            //console.log(validate_email.isValid);
             if(!validate_email.isValid) errors.push(validate_email.errorMessage);
 
             const validate_firstname = useValidation(firstname, doesNotCountainsNumbers, "firstname contain numbers");
-            console.log(validate_firstname.isValid);
+            //console.log(validate_firstname.isValid);
             if(!validate_firstname.isValid) errors.push(validate_firstname.errorMessage);
 
             const validate_lastname = useValidation(lastName, doesNotCountainsNumbers, "lastname contain numbers");
-            console.log(validate_lastname.isValid);
+            //console.log(validate_lastname.isValid);
             if(!validate_lastname.isValid) errors.push(validate_lastname.errorMessage);
             
-            console.log(errors);
+            //console.log(errors);
 
             const validate_tall = useValidation(tall, isNumbers, "is not a number");
             const validate_weight = useValidation(weight, isNumbers, "is not a number");
             if(validate_tall.isValid && validate_weight.isValid) calculateIMC(tall, weight);
-
-            return true;
+            
+            console.log(validate_email.isValid && validate_firstname.isValid && validate_lastname.isValid);
+            return validate_email.isValid && validate_firstname.isValid && validate_lastname.isValid;
         }
     }
-    const renderErrors = ({item}) => {
-        return <Text>{item}</Text>
-    }
+
     const submitHandler = (event) => {
         event.preventDefault();
 
-        validateForm();
-        
-    }
-/*
-            <FlatList 
-                data={errors}
-                renderItem={renderErrors}
-                key={errors.keys}
-            />
+        if(validateForm()){
+            console.log('OK');
 
-*/
+            let body = {
+                mail,
+                firstname,
+                lastName,
+                password,
+                phone,
+                weight,
+                tall
+            }
+            //createUser(body);
+            errors = [];
+            // redirection vers connexion
+            navigation.navigate("Landing");
+
+        }else{
+            console.log("bad");
+            errors = [];
+            return;
+        }
+
+    }
 
     return (
         <View>
+            
+            <Errors errorList={errors}/>
+
             <ScrollView>
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeMail}
                     value={mail}
                     placeholder="email"
+                    
                 />
                 
                 <TextInput 
