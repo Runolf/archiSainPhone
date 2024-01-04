@@ -10,7 +10,6 @@ const useDataUser = () => {
 
     const headers = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${BEARER}`,
         "Access-Control-Allow-Origin": "*",
     }
 
