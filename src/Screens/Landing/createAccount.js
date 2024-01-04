@@ -75,7 +75,6 @@ const CreateAccount = ({navigation}) => {
         postUser(newUser);
     }
     const validateForm = () => {
-        let isFormValid = false;
 
         if(password === checkPassword){
             const validate_email = useValidation(mail, isAnEmail, "email is invalid");
@@ -95,8 +94,7 @@ const CreateAccount = ({navigation}) => {
             const validate_tall = useValidation(tall, isNumbers, "is not a number");
             const validate_weight = useValidation(weight, isNumbers, "is not a number");
             if(validate_tall.isValid && validate_weight.isValid) calculateIMC(tall, weight);
-            
-            console.log(validate_email.isValid && validate_firstname.isValid && validate_lastname.isValid);
+
             return validate_email.isValid && validate_firstname.isValid && validate_lastname.isValid;
         }
     }
@@ -105,8 +103,6 @@ const CreateAccount = ({navigation}) => {
         event.preventDefault();
 
         if(validateForm()){
-            console.log('OK');
-
             let body = {
                 mail,
                 firstname,
@@ -122,7 +118,6 @@ const CreateAccount = ({navigation}) => {
             navigation.navigate("Landing");
 
         }else{
-            console.log("bad");
             errors = [];
             return;
         }
