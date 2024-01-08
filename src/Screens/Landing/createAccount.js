@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, ScrollView, FlatList } from 'react-native';
 import useDataUser from '../../Services/users/useDataUsers';
-import {isAnEmail, isNumbers, doesNotCountainsNumbers} from '../../Components/hooks/validators';
+import {isAnEmail, isNumbers, doesNotCountainsNumbers, isInami} from '../../Components/hooks/validators';
 import useValidation from '../../Components/hooks/useValidation';
 import Errors from '../_Shared/Errors';
 
@@ -69,7 +69,7 @@ const CreateAccount = ({navigation}) => {
     }
 
     const onChangeInami = (val) => {
-
+        setInami(val);
     }
     /*
     const onChangePicture  = (val) => {
@@ -95,13 +95,14 @@ const CreateAccount = ({navigation}) => {
             //console.log(validate_lastname.isValid);
             if(!validate_lastname.isValid) errors.push(validate_lastname.errorMessage);
             
-            //console.log(errors);
+            console.log(errors);
 
             const validate_tall = useValidation(tall, isNumbers, "is not a number");
             const validate_weight = useValidation(weight, isNumbers, "is not a number");
             if(validate_tall.isValid && validate_weight.isValid) calculateIMC(tall, weight);
 
-            return validate_email.isValid && validate_firstname.isValid && validate_lastname.isValid;
+            const validate_inami = isInami(inami);
+            return validate_email.isValid && validate_firstname.isValid && validate_lastname.isValid && validate_inami;
         }
     }
 
@@ -118,10 +119,10 @@ const CreateAccount = ({navigation}) => {
                 weight,
                 tall
             }
-            createUser(body);
+            //createUser(body);
             errors = [];
             // redirection vers connexion
-            navigation.navigate("Landing");
+            //navigation.navigate("Landing");
 
         }else{
             errors = [];
@@ -130,6 +131,7 @@ const CreateAccount = ({navigation}) => {
 
     }
 
+    // bug of scrolling. We could choose to display the inami OR the weight/tall info as we dont need the weight/tall info for nutritionnist
     return (
         <View>
             
@@ -181,18 +183,20 @@ const CreateAccount = ({navigation}) => {
                     placeholder="weight"
                 />
 
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeTall}
-                    value={tall}
-                    placeholder="tall"
-                />
+
 
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangePhone}
                     value={phone}
                     placeholder="phone"
+                />
+
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeInami}
+                    value={inami}
+                    placeholder="inami"
                 />
                 
                 <Pressable style={styles.button} title='onSubmit' onPress={submitHandler}>
