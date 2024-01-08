@@ -28,6 +28,11 @@ const CreateAccount = ({navigation}) => {
 
     const [inami, setInami] = useState();
 
+    const [displayPage1, setDisplayPage1] = useState("");
+
+    const [displayPage2, setDisplayPage2] = useState("none");
+
+    const [displayPage3, setDisplayPage3] = useState("none");
    // const [picture, setPicture] = useState();
     
     const onChangeMail = (val) => {
@@ -117,8 +122,11 @@ const CreateAccount = ({navigation}) => {
                 pwd: password,
                 phone,
                 weight,
-                tall
+                tall,
+                inami
             }
+
+            console.log(body);
             //createUser(body);
             errors = [];
             // redirection vers connexion
@@ -130,7 +138,12 @@ const CreateAccount = ({navigation}) => {
         }
 
     }
-
+    const changePage = () => {
+        
+        setDisplayPage1("none");
+        setDisplayPage2("");
+        setDisplayPage3("");
+    }
     // bug of scrolling. We could choose to display the inami OR the weight/tall info as we dont need the weight/tall info for nutritionnist
     return (
         <View>
@@ -138,67 +151,81 @@ const CreateAccount = ({navigation}) => {
             <Errors errorList={errors}/>
 
             <ScrollView>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeMail}
-                    value={mail}
-                    placeholder="email"
+
+                <View style={{display: displayPage1}} id='page1'>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeMail}
+                        value={mail}
+                        placeholder="email"
+                        
+                    />
                     
-                />
+                    <TextInput 
+                        style={styles.input}
+                        onChangeText={onChangePassword}
+                        value={password}
+                        placeholder="password"
+                        secureTextEntry={true}
+                    />
+                    
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeCheckPassword}
+                        value={checkPassword}
+                        placeholder="check password"
+                        secureTextEntry={true}
+                    />
+                </View>
                 
-                <TextInput 
-                    style={styles.input}
-                    onChangeText={onChangePassword}
-                    value={password}
-                    placeholder="password"
-                    secureTextEntry={true}
-                />
-                
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeCheckPassword}
-                    value={checkPassword}
-                    placeholder="check password"
-                    secureTextEntry={true}
-                />
+                <View style={{display: displayPage2}}  id='page2'>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeFirstname}
+                        value={firstname}
+                        placeholder="firstname"
+                    />
+                    
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeLastname}
+                        value={lastname}
+                        placeholder="lastname"
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeFirstname}
-                    value={firstname}
-                    placeholder="firstname"
-                />
-                
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeLastname}
-                    value={lastname}
-                    placeholder="lastname"
-                />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeWeight}
+                        value={weight}
+                        placeholder="weight"
+                    />
 
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeWeight}
-                    value={weight}
-                    placeholder="weight"
-                />
+                    <TextInput 
+                        style={styles.input}
+                        onChangeText={onChangeTall}
+                        value={tall}
+                        placeholder="tall"
+                    />
 
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangePhone}
+                        value={phone}
+                        placeholder="phone"
+                    />
 
-
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangePhone}
-                    value={phone}
-                    placeholder="phone"
-                />
-
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeInami}
-                    value={inami}
-                    placeholder="inami"
-                />
-                
+                </View>
+                <View style={{display: displayPage3}} id='page3'>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={onChangeInami}
+                        value={inami}
+                        placeholder="inami"
+                    />
+                </View>
+                <Pressable style={styles.button} title="changePage" onPress={changePage}>
+                    <Text>Change page</Text>
+                </Pressable>
                 <Pressable style={styles.button} title='onSubmit' onPress={submitHandler}>
                     <Text>Submit</Text>
                 </Pressable>
