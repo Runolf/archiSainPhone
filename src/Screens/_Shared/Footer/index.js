@@ -19,5 +19,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         backgroundColor: "rgb(54, 99, 99)",
+        padding: 15
     }
 });
