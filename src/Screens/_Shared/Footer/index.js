@@ -5,10 +5,9 @@ import ElementFooter from './elementFooter';
 const Footer = () => {
     return (
         <View style={styles.footer}>
-            <ElementFooter title="test1"/>
-            <ElementFooter title="test2"/>
-            <ElementFooter title="test3"/>
-            <ElementFooter title="test4"/>
+            <ElementFooter title="Objectif" logo="sports-score"/>
+            <ElementFooter title="Challenge" logo="sports-mma"/>
+            <ElementFooter title="Compte" logo="account-box"/>
         </View>
     );
 }
