@@ -46,7 +46,8 @@ const App = () => {
             <Stack.Screen name="Landing" component={LandingPage}/>
             <Stack.Screen name="Homescreen" component={HomeScreen}/>
             <Stack.Screen name="ManageAccount" component={ManageAccount}/>
-          
+            <Stack.Screen name="Footer" component={Footer} />
+            
           </Stack.Navigator>
           {isConnected && <Footer />}
         </NavigationContainer>

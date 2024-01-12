@@ -2,12 +2,12 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import ElementFooter from './elementFooter';
 
-const Footer = () => {
+const Footer = ({navigation}) => {
     return (
         <View style={styles.footer}>
-            <ElementFooter title="Objectif" logo="sports-score"/>
-            <ElementFooter title="Challenge" logo="sports-mma"/>
-            <ElementFooter title="Compte" logo="account-box"/>
+            <ElementFooter navigation={navigation} title="Objectif" logo="sports-score"/>
+            <ElementFooter navigation={navigation} title="Challenge" logo="sports-mma"/>
+            <ElementFooter navigation={navigation} title="Options" logo="more-horiz"/>
         </View>
     );
 }
