@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppCss from './Var_Css';
+import Footer from './src/Screens/_Shared/Footer';
 import {
   SafeAreaView,
   ScrollView,
@@ -27,6 +28,7 @@ const App = () => {
   const Stack = createNativeStackNavigator();
 
   const isDarkMode = useColorScheme() === 'dark';
+  const [isConnected, setIsConnected] = useState(true);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -34,20 +36,21 @@ const App = () => {
 
   return (
     <Provider store={store}>
-          <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <NavigationContainer theme={Theme}>
           <Stack.Navigator 
-          initialRouteName="Landing" 
-          screenOptions={{
-            headerShown: false
-    }}>
+            initialRouteName="Landing" 
+            screenOptions={{
+              headerShown: false
+          }}>
             <Stack.Screen name="Landing" component={LandingPage}/>
             <Stack.Screen name="Homescreen" component={HomeScreen}/>
             <Stack.Screen name="ManageAccount" component={ManageAccount}/>
           
           </Stack.Navigator>
+          {isConnected && <Footer />}
         </NavigationContainer>
-    </SafeAreaView>
+      </SafeAreaView>
     </Provider>
   );
 }
