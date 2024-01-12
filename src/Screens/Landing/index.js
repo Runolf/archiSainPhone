@@ -13,6 +13,13 @@ const LandingPage = ({navigation}) => {
     return (
         <View style={styles.container}>
 
+            <Pressable 
+                onPress={onPressButton}
+                style={styles.button}
+            > 
+                {hasAccount? <Text style={styles.text}>Doesn't have an account ?</Text> : <Text style={styles.text}>Already has an account ?</Text> }
+            </Pressable>
+
             {hasAccount ? 
             <>
                 <Text>connect account</Text>
@@ -24,13 +31,6 @@ const LandingPage = ({navigation}) => {
                 <CreateAccount navigation={navigation}/>
             </>
             }
-
-            <Pressable 
-                onPress={onPressButton}
-                style={styles.button}
-            > 
-                {hasAccount? <Text style={styles.text}>Doesn't have an account ?</Text> : <Text style={styles.text}>Already has an account ?</Text> }
-            </Pressable>
         </View>
     ) 
 }
