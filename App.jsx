@@ -19,6 +19,7 @@ import LandingPage from './src/Screens/Landing';
 import HomeScreen from './src/Screens/Landing/homeScreen';
 import {store} from './src/redux/store';
 import { Provider } from 'react-redux';
+import ManageAccount from './src/Screens/Account/ManageAccount';
 
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
     }}>
             <Stack.Screen name="Landing" component={LandingPage}/>
             <Stack.Screen name="Homescreen" component={HomeScreen}/>
+            <Stack.Screen name="ManageAccount" component={ManageAccount}/>
           
           </Stack.Navigator>
         </NavigationContainer>
