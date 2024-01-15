@@ -4,7 +4,7 @@ import {getAllUsersAction, getOneUserByMailAction} from '../../redux/actions/ind
 import { useDispatch } from 'react-redux';
 
 
-const useFetchUsers = ({bearer}) => {
+const useFetchUsers = () => {
     const dispatch = useDispatch();
 
     const URL = "http://10.0.2.2:8080/api/users";
@@ -46,7 +46,7 @@ const useFetchUsers = ({bearer}) => {
         }
     }
 
-    const getOneUserByMail = async (mail) => {
+    const getOneUserByMail = async (mail, bearer) => {
         try {
             const response = await axios.get(`${URL}/userMail/${mail}`, {
                 method: 'get',
@@ -56,12 +56,13 @@ const useFetchUsers = ({bearer}) => {
                 },
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${BEARER}`,
+                    Authorization: `Bearer ${bearer}`,
                     "Access-Control-Allow-Origin": "*",
                 }
             })
-            
+
             dispatch(getOneUserByMailAction(response.data));
+            return response.data;
         } catch (error) {
             
         }
@@ -69,7 +70,8 @@ const useFetchUsers = ({bearer}) => {
 
     return {
         getAllRole,
-        getAllUsers
+        getAllUsers,
+        getOneUserByMail
     };
 }
  

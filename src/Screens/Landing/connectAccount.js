@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable,  } from 'react-native';
 import useLoginUser from '../../Services/users/useLoginUser';
+import useFetchUsers from '../../Services/users/useFetchUsers';
 
 const ConnectAccount = ({navigation}) => {
-    const {authenticate, getStoredData} = useLoginUser();
-
+    const {authenticate, getStoredData, storeData} = useLoginUser();
+    const {getOneUserByMail} = useFetchUsers();
     const connectUser = async (email, pwd) => {
         await authenticate(email, pwd);
         let bearer = await getStoredData('token');
         
         // console.log("Bearer from connect user: ", bearer);
-        
+        let user = await getOneUserByMail(email, bearer);
+        await storeData("user", user);
+
         if(typeof bearer == "string") {
             navigation.navigate("Homescreen");
         } else {
