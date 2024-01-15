@@ -23,7 +23,7 @@ const LandingPage = ({navigation}) => {
             {hasAccount ? 
             <>
                 <Text>connect account</Text>
-                <ConnectAccount navigation={navigation} />  
+                <ConnectAccount navigation={navigation} />
             </>
             :
             <>
