@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppCss from './Var_Css';
+import ReduxTest from './src/Screens/TryComponent/reduxTest';
 import Footer from './src/Screens/_Shared/Footer';
 import {
   SafeAreaView,
@@ -21,6 +22,7 @@ import HomeScreen from './src/Screens/Landing/homeScreen';
 import {store} from './src/redux/store';
 import { Provider } from 'react-redux';
 import ManageAccount from './src/Screens/Account/ManageAccount';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const App = () => {
@@ -28,7 +30,20 @@ const App = () => {
   const Stack = createNativeStackNavigator();
 
   const isDarkMode = useColorScheme() === 'dark';
-  const [isConnected, setIsConnected] = useState(true);
+  const [isConnected, setIsConnected] = useState(false);
+  let user = AsyncStorage.getItem("user");
+
+  console.log('user exist: ', user);
+  // maybe need to use useMemo if it's bugging
+ 
+  useEffect(() => {
+    if(user) {
+      setIsConnected(!isConnected);
+    }
+  }, [])
+
+
+  
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -46,6 +61,7 @@ const App = () => {
             <Stack.Screen name="Landing" component={LandingPage}/>
             <Stack.Screen name="Homescreen" component={HomeScreen}/>
             <Stack.Screen name="ManageAccount" component={ManageAccount}/>
+            <Stack.Screen name='ReduxTest' component={ReduxTest}/>
             <Stack.Screen name="Footer" component={Footer} />
             
           </Stack.Navigator>

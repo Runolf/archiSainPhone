@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ElementFooter = (props, {navigation}) => {
     const goToScreen = () => {
-        navigation.navigate("Homescreen");
+        //navigation.navigate("ReduxTest");
     }
 
     return (

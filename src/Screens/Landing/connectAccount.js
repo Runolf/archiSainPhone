@@ -12,7 +12,7 @@ const ConnectAccount = ({navigation}) => {
         
         // console.log("Bearer from connect user: ", bearer);
         let user = await getOneUserByMail(email, bearer);
-        await storeData("user", user);
+        await storeData("user", JSON.stringify(user));
 
         if(typeof bearer == "string") {
             navigation.navigate("Homescreen");
