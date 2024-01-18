@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AppCss from './Var_Css';
 import ReduxTest from './src/Screens/TryComponent/reduxTest';
-import Footer from './src/Screens/_Shared/Footer';
 import {
   SafeAreaView,
   ScrollView,
@@ -62,10 +60,8 @@ const App = () => {
             <Stack.Screen name="Homescreen" component={HomeScreen}/>
             <Stack.Screen name="ManageAccount" component={ManageAccount}/>
             <Stack.Screen name='ReduxTest' component={ReduxTest}/>
-            <Stack.Screen name="Footer" component={Footer} />
             
           </Stack.Navigator>
-          {isConnected && <Footer />}
         </NavigationContainer>
       </SafeAreaView>
     </Provider>
