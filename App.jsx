@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReduxTest from './src/Screens/TryComponent/reduxTest';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,20 +12,14 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LandingPage from './src/Screens/Landing';
-import HomeScreen from './src/Screens/Landing/homeScreen';
+import Navigation from './src/Screens/navigations/index';
 import {store} from './src/redux/store';
 import { Provider } from 'react-redux';
-import ManageAccount from './src/Screens/Account/ManageAccount';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const App = () => {
   
-  const Stack = createNativeStackNavigator();
-
   const isDarkMode = useColorScheme() === 'dark';
   const [isConnected, setIsConnected] = useState(false);
   let user = AsyncStorage.getItem("user");
@@ -40,9 +33,6 @@ const App = () => {
     }
   }, [])
 
-
-  
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -50,19 +40,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
-        <NavigationContainer theme={Theme}>
-          <Stack.Navigator 
-            initialRouteName="Landing" 
-            screenOptions={{
-              headerShown: false
-          }}>
-            <Stack.Screen name="Landing" component={LandingPage}/>
-            <Stack.Screen name="Homescreen" component={HomeScreen}/>
-            <Stack.Screen name="ManageAccount" component={ManageAccount}/>
-            <Stack.Screen name='ReduxTest' component={ReduxTest}/>
-            
-          </Stack.Navigator>
-        </NavigationContainer>
+        <Navigation />
       </SafeAreaView>
     </Provider>
   );
